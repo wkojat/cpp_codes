@@ -1,3 +1,6 @@
+//function template that overloads operator<< (putting into stream) for vectors
+//contatining fundamental built-in types of variables
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -14,14 +17,16 @@ ostream& operator<< (ostream &display, const vector<T> &w)
 
 int main ()
 {
-    vector <int> numbersInt {1, 2, 3, 4, 5};
-    cout <<numbersInt <<endl;
+    cout <<"content of vectors with overloaded operator<< :" <<endl;
 
-    vector <double> numbersDou {3.12, 5.47, 9.31};
-    cout <<numbersDou <<endl;
+    vector <int> vec_int {4, 7, 9};
+    cout <<vec_int <<endl;
 
-    vector <char> numbersCha {'b', 'k', 'r'};
-    cout <<numbersCha <<endl;
+    vector <double> vec_dou {3.12, 5.47, 9.31};
+    cout <<vec_dou <<endl;
+
+    vector <char> vec_char {'b', 'k', 'r'};
+    cout <<vec_char <<endl;
 
     system ("pause");
 }
