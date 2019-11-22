@@ -1,7 +1,15 @@
-/* program sprawdza działanie przeładowanego operatora ++, a w tym istotną różnicę w ich kodzie:
-   operator preinkrementacji zwraca poprzez referencję (bo najpierw jest inkrementacja, a potem obiekt jest wartością wyrażenia),
+/* english
+   program tests overloaded pre- and postincrementation operators for user defined examplary class;
+   preincrementation operator returns an object by reference (at first incrementation happens, and then object becomes part of an expression);
+   postincrementation operator returns by value a copy of an object before its incrementation (at first object becomes part of an expression,
+   and at the end postincrementation of that object happens) */
+
+/* polski
+   program sprawdza działanie przeładowanego operatora ++, a w tym istotną różnicę w ich kodzie:
+   operator preinkrementacji zwraca poprzez referencję (bo najpierw jest inkrementacja, a potem obiekt staje się wartością wyrażenia),
    operator postinkrementacji zwraca kopię obiektu sprzed inkrementacji (bo najpierw obiekt jest wartością wyrażenia
    a dopiero na sam koniec następuje inkrementacja) */
+
 
 #include <iostream>
 using namespace std;
@@ -10,41 +18,44 @@ class Basket
 {
     public:
         int apples {10};
-        Basket& operator++();
-        Basket operator++(int);
+
+        Basket& operator++();       //PREincrementation operator overload
+        Basket operator++(int);     //POSTincrementation operator overload
 };
 
-Basket& Basket::operator++ ()       //PREinkrementacja
+Basket& Basket::operator++ ()
 {
     apples = apples + 1;
     return *this;
 }
 
-Basket Basket::operator++ (int)     //POSTinkrementacja
+Basket Basket::operator++ (int)     //unnamed argument of int type is required to distinguish this operator from the one above
 {
-    Basket result {*this};
+    Basket result {*this};          //default copy constructor
     apples = apples + 1;
     return result;
 }
 
 int main (int argc, char *argv [])
 {
-    Basket wooden;
-    cout <<"should be 10: " <<wooden.apples <<endl;
+    cout <<"overload of both operator++ functions for exemplary user-defined class tests:" <<endl;
 
-    ++wooden;
-    cout <<"should be 11: " <<wooden.apples <<endl;
+    Basket first;
+    cout <<"should be 10: " <<first.apples <<endl;
 
-    wooden++;
-    cout <<"should be 12: " <<wooden.apples <<endl;
+    ++first;
+    cout <<"should be 11: " <<first.apples <<endl;
 
-    Basket wired {++wooden};
-    cout <<"should be 13: " <<wired.apples <<endl;
+    first++;
+    cout <<"should be 12: " <<first.apples <<endl;
 
-    Basket plastic {wooden++};
-    cout <<"should be 13: " <<plastic.apples <<endl;
+    Basket second {++first};                                //default copy constructor
+    cout <<"should be 13: " <<second.apples <<endl;
 
-    cout <<"should be 14: " <<wooden.apples <<endl;
+    Basket third {first++};                                 //default copy constructor
+    cout <<"should be 13: " <<third.apples <<endl;
+
+    cout <<"should be 14: " <<first.apples <<endl;
 
     system ("pause");
 }
