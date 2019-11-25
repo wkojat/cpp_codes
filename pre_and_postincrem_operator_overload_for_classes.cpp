@@ -1,17 +1,21 @@
 /* english
-   program tests overloaded pre- and postincrementation operators for user defined examplary class;
-   preincrementation operator returns an object by reference (at first incrementation happens, and then object becomes part of an expression);
-   postincrementation operator returns by value a copy of an object before its incrementation (at first object becomes part of an expression,
-   and at the end postincrementation of that object happens) */
+program tests overload of operator++ (both pre- and postincrementation versions) for examplary user-defined class;
+preincrementation operator returns an object by reference (at first incrementation happens,
+and then object is used in an expression);
+postincrementation operator returns by value a copy of an object before its incrementation
+(at first object is used in an expression, and then incrementation of that object happens)
+*/
 
 /* polski
-   program sprawdza działanie przeładowanego operatora ++, a w tym istotną różnicę w ich kodzie:
-   operator preinkrementacji zwraca poprzez referencję (bo najpierw jest inkrementacja, a potem obiekt staje się wartością wyrażenia),
-   operator postinkrementacji zwraca kopię obiektu sprzed inkrementacji (bo najpierw obiekt jest wartością wyrażenia
-   a dopiero na sam koniec następuje inkrementacja) */
+program sprawdza działanie przeładowanego operatora ++, a w tym istotną różnicę w ich kodzie:
+operator preinkrementacji zwraca poprzez referencję (najpierw następuje działanie operatora ++,
+a potem obiekt staje się wartością wyrażenia);
+operator postinkrementacji zwraca kopię obiektu sprzed inkrementacji (najpierw obiekt jest wartością
+wyrażenia, a dopiero na koniec następuje działanie operatora ++)
+*/
 
 
-#include <iostream>
+#include <iostream>     //std::cout
 using namespace std;
 
 class Basket
@@ -38,7 +42,7 @@ Basket Basket::operator++ (int)     //unnamed argument of int type is required t
 
 int main (int argc, char *argv [])
 {
-    cout <<"overload of both operator++ functions for exemplary user-defined class tests:" <<endl;
+    cout <<"overload of both operator++ functions for examplary user-defined class tests:" <<endl;
 
     Basket first;
     cout <<"should be 10: " <<first.apples <<endl;
